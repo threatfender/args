@@ -17,7 +17,7 @@ when isMainModule:
   echo "total argument count: ", argc
   echo "script name: ", argv[0]
 
-  if argc() > 1:
+  if argc > 1:
     echo "script args: ", argv[1..^1]
 ```
 ## Development
