@@ -1,5 +1,9 @@
 # Args Changelog
 
+## v0.3.0 - February 02, 2025
+
+  * Rewrite library to export `argv` and `argc` as immutable variables
+
 ## v0.2.0 - February 01, 2025
 
   * Cache calls to `argv` and `argc`

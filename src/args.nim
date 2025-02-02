@@ -8,35 +8,27 @@
 ##
 
 when NimMajor < 2:
-  import std/[os, options]
+  import std/[os]
 else:
-  import std/[os, options, cmdline]
+  import std/[os, cmdline]
 
-var argvCache: Option[seq[string]]
-var argcCache: Option[int]
 
-proc argv*(): seq[string] =
-  ## Return the sequence of command line arguments
-  ## including the executable/script name
-  if argvCache.isNone:
-    var vals: seq[string] = @[]
-    vals.add(os.getAppFilename().extractFilename())
+proc initialize(): seq[string] =
+  result.add(os.getAppFilename().extractFilename())
 
-    when NimMajor < 2:
-      vals.add(os.commandLineParams())
-    else:
-      vals.add(cmdline.commandLineParams())
+  when NimMajor < 2:
+    result.add(os.commandLineParams())
+  else:
+    result.add(cmdline.commandLineParams())
 
-    argvCache = some(vals)
+let argv*: seq[string] = initialize()
+  ## Sequence of command line arguments
+  ## starting with the executable/script name
 
-  return argvCache.get()
-
-proc argc*(): int =
-  ## Return the count of command line arguments including the name
+let argc*: int = argv.len
+  ## Count of command line arguments including the name
   ## of the executable/script.
-  if argcCache.isNone:
-    argcCache = some(argv().len)
-  return argcCache.get()
+
 
 when isMainModule:
-  echo argc(), " ", argv()
+  echo argc, " ", argv

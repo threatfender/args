@@ -1,6 +1,6 @@
 # Package
 
-version       = "0.2.0"
+version       = "0.3.0"
 author        = "Threatfender, LLC"
 description   = "argv and argc for command line arguments"
 license       = "MIT"
